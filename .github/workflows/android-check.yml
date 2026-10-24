@@ -28,6 +28,9 @@ jobs:
           unzip -q "$(ls 3-1-project.zip | head -1)" -d project
           cp 4-2-BridgeRegression.java project/src/site/federicotaranu/nova/BridgeRegression.java
           python3 - <<'PY'
+          p='project/src/site/federicotaranu/nova/MainActivity.java'
+          s=open(p).read().replace('getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);','')
+          open(p,'w').write(s)
           p='project/AndroidManifest.xml'
           s=open(p).read().replace('</manifest>','<instrumentation android:name=".BridgeRegression" android:targetPackage="site.federicotaranu.nova"/></manifest>')
           open(p,'w').write(s)
