@@ -47,8 +47,7 @@ jobs:
             mkdir -p evidence
             adb install project/build/NOVA-2026.10.24.android.4-test.apk
             timeout 100s adb shell am instrument -w site.federicotaranu.nova/.BridgeRegression | tee evidence/result.txt
-            adb shell screencap -p /sdcard/shot.png
-            adb pull /sdcard/shot.png evidence/android-native.png
+            adb pull /sdcard/Android/data/site.federicotaranu.nova/files/native.png evidence/android-native.png
             grep 'RESULT_OK\|INSTRUMENTATION_CODE: -1' evidence/result.txt
       - uses: actions/upload-artifact@v4
         if: always()
