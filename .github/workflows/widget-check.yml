@@ -1,7 +1,7 @@
 name: Android parity verification
 on:
   push:
-    paths: ['4-ParityFinal.java', '.github/workflows/*widget-check*']
+    paths: ['6-ParityVerified.java', '.github/workflows/*widget-check*']
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,14 +29,14 @@ jobs:
           sudo udevadm trigger --name-match=kvm
       - name: Prepare build
         run: |
-          unzip -q "$(ls 3-project7final.zip | head -1)" -d project
-          cp 4-ParityFinal.java project/src/site/federicotaranu/nova/ParityFinal.java
+          unzip -q "$(ls 5-project7verified.zip | head -1)" -d project
+          cp 6-ParityVerified.java project/src/site/federicotaranu/nova/ParityVerified.java
           python3 - <<'PY'
           p='project/src/site/federicotaranu/nova/MainActivity.java'
           s=open(p).read().replace('getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);','')
           open(p,'w').write(s)
           p='project/AndroidManifest.xml'
-          s=open(p).read().replace('</manifest>','<instrumentation android:name=".ParityFinal" android:targetPackage="site.federicotaranu.nova"/></manifest>')
+          s=open(p).read().replace('</manifest>','<instrumentation android:name=".ParityVerified" android:targetPackage="site.federicotaranu.nova"/></manifest>')
           open(p,'w').write(s)
           PY
           sdkmanager 'platforms;android-35' 'build-tools;35.0.0' >/dev/null
@@ -54,7 +54,7 @@ jobs:
             adb shell settings put secure show_ime_with_hard_keyboard 1
             mkdir -p evidence
             adb install project/build/NOVA-2026.10.24.android.7-test.apk
-            timeout 180s adb shell am instrument -w site.federicotaranu.nova/.ParityFinal | tee evidence/result.txt
+            timeout 180s adb shell am instrument -w site.federicotaranu.nova/.ParityVerified | tee evidence/result.txt
             adb root
             adb wait-for-device
             adb pull /sdcard/Android/data/site.federicotaranu.nova/files/ evidence/ || true
