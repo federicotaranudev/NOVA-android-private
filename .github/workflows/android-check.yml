@@ -42,7 +42,7 @@ jobs:
           ANDROID_HOME=$ANDROID_HOME JAVA_HOME=$JAVA_HOME NOVA_COMPILE_PLATFORM=android-35 NOVA_KEYSTORE=/tmp/test.p12 NOVA_KEYPASS_FILE=/tmp/test-pass bash build.sh
       - uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 35
+          api-level: 30
           arch: x86_64
           profile: pixel_2
           disable-animations: true
