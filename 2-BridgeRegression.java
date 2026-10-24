@@ -1,6 +1,7 @@
 package site.federicotaranu.nova;
 import android.app.*;import android.os.*;import android.content.*;import android.net.Uri;import android.webkit.*;import java.util.concurrent.*;
 public class BridgeRegression extends Instrumentation {
+ public void onCreate(Bundle args){super.onCreate(args);start();}
  MainActivity a;String value;
  String evaluate(String script)throws Exception{CountDownLatch l=new CountDownLatch(1);runOnMainSync(()->a.web.evaluateJavascript(script,v->{value=v;l.countDown();}));if(!l.await(15,TimeUnit.SECONDS))throw new Exception("JS callback timeout");return value;}
  public void onStart(){Bundle result=new Bundle();try{
