@@ -1,0 +1,17 @@
+package site.federicotaranu.nova;
+import android.app.*;import android.appwidget.*;import android.os.*;import android.content.*;import android.view.accessibility.*;import org.json.*;import java.util.*;
+public class WidgetRegression extends Instrumentation {
+ public void onCreate(Bundle b){super.onCreate(b);start();}
+ void shot(String name)throws Exception{Thread.sleep(1800);android.graphics.Bitmap b=getUiAutomation().takeScreenshot();java.io.FileOutputStream o=new java.io.FileOutputStream(new java.io.File(getTargetContext().getExternalFilesDir(null),name));b.compress(android.graphics.Bitmap.CompressFormat.PNG,100,o);o.close();}
+ boolean click(AccessibilityNodeInfo n,String text){if(n==null)return false;CharSequence t=n.getText();if(t!=null&&t.toString().equalsIgnoreCase(text)){while(n!=null&&!n.isClickable())n=n.getParent();return n!=null&&n.performAction(AccessibilityNodeInfo.ACTION_CLICK);}for(int i=0;i<n.getChildCount();i++)if(click(n.getChild(i),text))return true;return false;}
+ String tree(AccessibilityNodeInfo n){if(n==null)return "";String s="["+n.getClassName()+":"+n.getText()+":"+n.getContentDescription()+"]";for(int i=0;i<n.getChildCount();i++)s+=tree(n.getChild(i));return s;}
+ public void onStart(){Bundle r=new Bundle();try{Context c=getTargetContext();MainActivity a=(MainActivity)startActivitySync(new Intent(c,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));Thread.sleep(12000);
+ Calendar now=Calendar.getInstance();String d=String.format(Locale.ROOT,"%04d-%02d-%02d",now.get(1),now.get(2)+1,now.get(5));int m=now.get(11)*60+now.get(12);
+ NovaWidgetStore.saveTimetable(c,new JSONObject().put("lessons",new JSONArray().put(new JSONObject().put("d",now.get(7)).put("s",Math.max(0,m-5)).put("e",Math.min(1440,m+50)).put("n","Informatica").put("r","A34"))).toString());
+ NovaWidgetStore.saveHomework(c,new JSONObject().put("items",new JSONArray().put(new JSONObject().put("d",d).put("s","INFO").put("t","Esercizio sintetico di prova"))).toString());
+ NovaWidgetStore.saveEvents(c,new JSONObject().put("dots",new JSONArray().put(new JSONObject().put("d",d).put("k","test")))).toString());
+ AppWidgetManager am=AppWidgetManager.getInstance(c);r.putString("providers",am.getInstalledProviders().toString());r.putBoolean("pinSupported",am.isRequestPinAppWidgetSupported());
+ for(String p:new String[]{"NovaWidget","CalendarWidget"}){runOnMainSync(()->a.startActivity(new Intent(c,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));Thread.sleep(1000);boolean ok=am.requestPinAppWidget(new ComponentName(c,"site.federicotaranu.nova."+p),null,null);r.putBoolean(p+"Requested",ok);Thread.sleep(2200);r.putString(p+"Dialog",tree(getUiAutomation().getRootInActiveWindow()));shot(p+"-dialog.png");boolean clicked=click(getUiAutomation().getRootInActiveWindow(),"Add to home screen")||click(getUiAutomation().getRootInActiveWindow(),"Add automatically")||click(getUiAutomation().getRootInActiveWindow(),"Add");r.putBoolean(p+"Added",clicked);Thread.sleep(2500);NovaWidget.refresh(c);c.startActivity(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));Thread.sleep(1800);r.putString(p+"Home",tree(getUiAutomation().getRootInActiveWindow()));shot(p+"-home.png");r.putInt(p+"Count",am.getAppWidgetIds(new ComponentName(c,"site.federicotaranu.nova."+p)).length);}
+ finish(Activity.RESULT_OK,r);
+ }catch(Exception e){r.putString("error",e.toString());finish(Activity.RESULT_CANCELED,r);}}
+}
