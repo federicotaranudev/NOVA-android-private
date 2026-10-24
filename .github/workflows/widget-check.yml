@@ -29,7 +29,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
       - name: Prepare build
         run: |
-          unzip -q "$(ls 1-project5.zip | head -1)" -d project
+          unzip -q "$(ls 1-project6.zip | head -1)" -d project
           cp 1-WidgetRegression.java project/src/site/federicotaranu/nova/WidgetRegression.java
           python3 - <<'PY'
           p='project/src/site/federicotaranu/nova/MainActivity.java'
@@ -53,7 +53,7 @@ jobs:
           script: |
             adb shell settings put secure show_ime_with_hard_keyboard 1
             mkdir -p evidence
-            adb install project/build/NOVA-2026.10.24.android.5-test.apk
+            adb install project/build/NOVA-2026.10.24.android.6-test.apk
             timeout 120s adb shell am instrument -w site.federicotaranu.nova/.WidgetRegression | tee evidence/result.txt
             adb root
             adb wait-for-device
