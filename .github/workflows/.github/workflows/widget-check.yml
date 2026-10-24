@@ -1,7 +1,7 @@
 name: Android home widget verification
 on:
   push:
-    paths: ['WidgetRegression.java', '.github/workflows/*widget-check*']
+    paths: ['1-WidgetRegression.java', '.github/workflows/*widget-check*']
   workflow_dispatch:
 permissions:
   contents: read
@@ -30,7 +30,7 @@ jobs:
       - name: Prepare build
         run: |
           unzip -q "$(ls 1-project5.zip | head -1)" -d project
-          cp WidgetRegression.java project/src/site/federicotaranu/nova/WidgetRegression.java
+          cp 1-WidgetRegression.java project/src/site/federicotaranu/nova/WidgetRegression.java
           python3 - <<'PY'
           p='project/src/site/federicotaranu/nova/MainActivity.java'
           s=open(p).read().replace('getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);','')
