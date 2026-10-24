@@ -29,7 +29,7 @@ jobs:
           sudo udevadm trigger --name-match=kvm
       - name: Prepare build
         run: |
-          unzip -q "$(ls 1-project6.zip | head -1)" -d project
+          unzip -q "$(ls 2-project6.zip | head -1)" -d project
           cp 1-WidgetRegression.java project/src/site/federicotaranu/nova/WidgetRegression.java
           python3 - <<'PY'
           p='project/src/site/federicotaranu/nova/MainActivity.java'
