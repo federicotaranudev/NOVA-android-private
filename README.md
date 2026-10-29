@@ -10,16 +10,16 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/federicotaranudev/NOVA-android-private/releases/tag/v2026.10.25.android.15"><img src="https://img.shields.io/badge/release-Android%2015-blue" alt="Release Android 15"></a>
+  <a href="https://github.com/federicotaranudev/NOVA-android-private/releases/tag/v2026.10.28.android.17"><img src="https://img.shields.io/badge/release-Android%2017-blue" alt="Release Android 17"></a>
   <img src="https://img.shields.io/badge/piattaforma-Android%208%2B-3DDC84?logo=android&logoColor=white" alt="Android 8+ dichiarato">
   <img src="https://img.shields.io/badge/stato-build%20di%20prova-orange" alt="Build di prova">
 </p>
 
 <p align="center">
-  <a href="https://github.com/federicotaranudev/NOVA-android-private/releases/download/v2026.10.25.android.15/NOVA-2026.10.25.android.15-test.apk"><img src="https://img.shields.io/badge/Scarica%20NOVA-APK%20Android-181717?style=for-the-badge&logo=android&logoColor=3DDC84" alt="Scarica APK Android"></a>
+  <a href="https://github.com/federicotaranudev/NOVA-android-private/releases/download/v2026.10.28.android.17/NOVA-2026.10.28.android.17.apk"><img src="https://img.shields.io/badge/Scarica%20NOVA-APK%20Android-181717?style=for-the-badge&logo=android&logoColor=3DDC84" alt="Scarica APK Android"></a>
 </p>
 
-<p align="center"><sub>Versione 2026.10.25.android.15 · APK firmato · Aggiorna senza disinstallare</sub></p>
+<p align="center"><sub>Versione 2026.10.28.android.17 · APK firmato · Aggiorna senza disinstallare</sub></p>
 
 ---
 
@@ -58,7 +58,7 @@ Tema chiaro/scuro, intro con audio e feedback aptico, meteo, batteria, timer, bl
 
 L'APK di prova è firmato e si installa direttamente su Android. Non servono AltStore, Sideloadly o la firma settimanale di iOS.
 
-1. Scarica [NOVA per Android (.apk)](https://github.com/federicotaranudev/NOVA-android-private/releases/download/v2026.10.25.android.15/NOVA-2026.10.25.android.15-test.apk) dalla [release Android 15](https://github.com/federicotaranudev/NOVA-android-private/releases/tag/v2026.10.25.android.15).
+1. Scarica [NOVA per Android (.apk)](https://github.com/federicotaranudev/NOVA-android-private/releases/download/v2026.10.28.android.17/NOVA-2026.10.28.android.17.apk) dalla [release Android 17](https://github.com/federicotaranudev/NOVA-android-private/releases/tag/v2026.10.28.android.17).
 2. Apri l'APK e consenti l'installazione da quella fonte, se Android lo chiede.
 3. Aggiorna **sopra l'app esistente**, senza disinstallarla e senza cancellare i dati.
 4. Per mantenere gli aggiornamenti compatibili deve essere usata la stessa chiave di firma.
